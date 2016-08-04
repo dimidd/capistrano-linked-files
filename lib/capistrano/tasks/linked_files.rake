@@ -22,7 +22,7 @@ namespace :linked_files do
     task :files do
       on fetch(:upload_servers) do
         info "Uploading files to: #{fetch(:upload_roles)}"
-        fetch(:linked_files, []).each do |file|
+        (fetch(:linked_files, []) - fetch(:link_only_files, [])).each do |file|
           upload! file, "#{shared_path}/#{file}"
         end
       end
